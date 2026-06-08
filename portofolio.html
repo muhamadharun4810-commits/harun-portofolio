@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Muhamad Harun Nizan | Portfolio</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { inter: ['Inter', 'sans-serif'] },
+          colors: {
+            dark: {
+              base: '#0a0f1e',
+              card: '#0d1530',
+              border: '#1e2a45',
+              muted: '#1a2340',
+            },
+            accent: {
+              cyan: '#22d3ee',
+              blue: '#3b82f6',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0a0f1e;
+      color: #e2e8f0;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1e; }
+    ::-webkit-scrollbar-thumb { background: #22d3ee; border-radius: 3px; }
+
+    /* ── Gradient text ── */
+    .gradient-text {
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Gradient border button ── */
+    .btn-gradient {
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      color: #0a0f1e;
+      font-weight: 700;
+      border-radius: 9999px;
+      padding: 0.65rem 1.8rem;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-gradient:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    .btn-outline {
+      border: 2px solid #22d3ee;
+      color: #22d3ee;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.6rem 1.75rem;
+      transition: background 0.2s, color 0.2s, transform 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-outline:hover { background: #22d3ee; color: #0a0f1e; transform: translateY(-2px); }
+
+    /* ── Card base ── */
+    .card {
+      background: #0d1530;
+      border: 1px solid #1e2a45;
+      border-radius: 1rem;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-6px); }
+
+    /* ── Card glow on hover ── */
+    .card-glow:hover {
+      box-shadow: 0 0 24px rgba(34, 211, 238, 0.35), 0 8px 32px rgba(34, 211, 238, 0.12);
+    }
+
+    /* ── Section title underline ── */
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      border-radius: 2px;
+      margin: 0.6rem auto 0;
+    }
+
+    /* ── Navbar ── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    #navbar.scrolled {
+      background: rgba(10, 15, 30, 0.88);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    }
+    .nav-link {
+      position: relative;
+      color: #94a3b8;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      padding: 0.25rem 0;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 2px;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+    .nav-link:hover, .nav-link.active { color: #22d3ee; }
+    .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+    /* ── Hero ── */
+    .hero-bg {
+      background: radial-gradient(ellipse at 20% 50%, rgba(34,211,238,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 80% 20%, rgba(59,130,246,0.08) 0%, transparent 60%),
+                  #0a0f1e;
+    }
+    .hero-avatar {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      background: linear-gradient(#0d1530, #0d1530) padding-box,
+                  linear-gradient(135deg, #22d3ee, #3b82f6) border-box;
+      object-fit: cover;
+    }
+    .typing-cursor::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+      color: #22d3ee;
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── Skill badge ── */
+    .skill-badge {
+      background: rgba(34,211,238,0.08);
+      border: 1px solid rgba(34,211,238,0.25);
+      color: #22d3ee;
+      border-radius: 9999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* ── Project card ── */
+    .project-card { overflow: hidden; }
+    .project-card .tag {
+      background: rgba(34,211,238,0.1);
+      color: #22d3ee;
+      font-size: 0.72rem;
+      font-weight: 600;
+      border-radius: 4px;
+      padding: 0.18rem 0.55rem;
+    }
+    .project-icon-wrap {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(59,130,246,0.15));
+      border-radius: 0.75rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    /* ── Certificate card ── */
+    .cert-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+    .cert-card .cert-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      background: #0a0f1e;
+    }
+    .cert-card .cert-img-wrap img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .cert-card:hover .cert-img-wrap img { transform: scale(1.06); }
+    .cert-card .cert-overlay {
+      position: absolute; inset: 0;
+      background: rgba(10,15,30,0.75);
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem;
+      color: #22d3ee;
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .cert-card:hover .cert-overlay { opacity: 1; }
+    .cert-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.5rem;
+      color: #3b82f6;
+    }
+
+    /* ── Filter buttons ── */
+    .filter-btn {
+      background: rgba(34,211,238,0.06);
+      border: 1px solid #1e2a45;
+      color: #64748b;
+      transition: all 0.2s ease;
+    }
+    .filter-btn:hover {
+      border-color: #22d3ee;
+      color: #22d3ee;
+      background: rgba(34,211,238,0.1);
+    }
+    .active-filter {
+      background: linear-gradient(135deg,#22d3ee,#3b82f6) !important;
+      border-color: transparent !important;
+      color: #0a0f1e !important;
+      box-shadow: 0 4px 14px rgba(34,211,238,0.3);
+    }
+
+    /* ── Project card hide/show ── */
+    .project-hidden {
+      display: none !important;
+    }
+
+    /* ── Image skeleton loading ── */
+    .img-skeleton {
+      background: linear-gradient(90deg, #0d1530 25%, #1a2540 50%, #0d1530 75%);
+      background-size: 200% 100%;
+      animation: skeleton-shimmer 1.4s infinite;
+    }
+    @keyframes skeleton-shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    .cert-img-wrap img {
+      transition: opacity 0.4s ease;
+    }
+    .cert-img-wrap img.loading-img {
+      opacity: 0;
+    }
+    .cert-img-wrap img.loaded-img {
+      opacity: 1;
+    }
+
+    /* ── Dashed slot ── */
+    .dashed-slot {
+      border: 2px dashed #1e2a45;
+      border-radius: 1rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 0.75rem;
+      min-height: 200px;
+      transition: border-color 0.3s, background 0.3s;
+      cursor: pointer;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+    .dashed-slot:hover { border-color: #22d3ee; background: rgba(34,211,238,0.04); color: #22d3ee; }
+    .dashed-slot i { font-size: 2rem; }
+
+    /* ── Contact form ── */
+    .form-input {
+      background: #0d1530;
+      border: 1px solid #1e2a45;
+      border-radius: 0.6rem;
+      padding: 0.75rem 1rem;
+      color: #e2e8f0;
+      width: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    .form-input:focus {
+      border-color: #22d3ee;
+      box-shadow: 0 0 0 3px rgba(34,211,238,0.12);
+    }
+    .form-input::placeholder { color: #475569; }
+    textarea.form-input { resize: vertical; min-height: 130px; }
+
+    /* ── Social info card ── */
+    .social-card {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: #0d1530;
+      border: 1px solid #1e2a45;
+      border-radius: 0.75rem;
+      transition: border-color 0.25s, transform 0.25s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .social-card:hover { border-color: #22d3ee; transform: translateX(4px); }
+    .social-icon {
+      width: 42px; height: 42px;
+      background: linear-gradient(135deg, rgba(34,211,238,0.15), rgba(59,130,246,0.15));
+      border-radius: 0.6rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      color: #22d3ee;
+      flex-shrink: 0;
+    }
+
+    /* ── Reveal animation ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Footer ── */
+    footer { border-top: 1px solid #1e2a45; }
+
+    /* ── Mobile menu ── */
+    #mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 1rem 1.5rem 1.25rem;
+      background: rgba(10,15,30,0.96);
+      border-top: 1px solid #1e2a45;
+    }
+    #mobile-menu.open { display: flex; }
+    .mobile-nav-link {
+      color: #94a3b8;
+      font-weight: 500;
+      padding: 0.6rem 0;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      border-bottom: 1px solid #1e2a45;
+    }
+    .mobile-nav-link:last-child { border-bottom: none; }
+    .mobile-nav-link:hover { color: #22d3ee; }
+
+    /* ── Page load fade-in ── */
+    body { opacity: 0; transition: opacity 0.5s ease; }
+    body.loaded { opacity: 1; }
+
+    /* ── Scroll progress bar ── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
+      background-size: 200% 100%;
+      z-index: 10000; transition: width 0.1s linear;
+      animation: progressShimmer 2s linear infinite;
+    }
+    @keyframes progressShimmer { 0%{background-position:0%} 100%{background-position:200%} }
+
+    /* ── Back to top button ── */
+    #back-to-top {
+      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 900;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      color: #0a0f1e; font-size: 1rem; border: none; outline: none;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(34,211,238,0.4);
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.3s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      cursor: pointer;
+    }
+    #back-to-top.visible { opacity: 1; transform: translateY(0); }
+    #back-to-top:hover { transform: translateY(-4px) scale(1.1); }
+
+    /* ── Particles canvas ── */
+    #particles-canvas {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
+    }
+    .hero-bg { position: relative; overflow: hidden; }
+    .hero-content { position: relative; z-index: 1; }
+
+    /* ── Hero staggered fade-in ── */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-anim {
+      opacity: 0;
+      animation: fadeInUp 0.7s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-anim:nth-child(1){animation-delay:0.1s}
+    .hero-anim:nth-child(2){animation-delay:0.22s}
+    .hero-anim:nth-child(3){animation-delay:0.34s}
+    .hero-anim:nth-child(4){animation-delay:0.46s}
+    .hero-anim:nth-child(5){animation-delay:0.58s}
+
+    /* ── Reveal variants ── */
+    .reveal-up {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left {
+      opacity: 0; transform: translateX(-40px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-up.visible,.reveal-left.visible,.reveal-right.visible {
+      opacity: 1; transform: translate(0,0);
+    }
+
+    /* ── Project card sweep border + icon pulse ── */
+    .project-card { position: relative; }
+    .project-card::before {
+      content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 3px;
+      background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
+      transition: left 0.4s cubic-bezier(0.16,1,0.3,1); z-index: 2;
+    }
+    .project-card:hover::before { left: 0; }
+    .project-icon-wrap {
+      transition: box-shadow 0.3s, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .project-card:hover .project-icon-wrap {
+      box-shadow: 0 0 20px rgba(34,211,238,0.5);
+      transform: scale(1.12) rotate(-5deg);
+    }
+
+    /* ── Certificate overlay slides up ── */
+    .cert-card .cert-overlay {
+      bottom: -100%; opacity: 1;
+      background: linear-gradient(to top, rgba(10,15,30,0.95), rgba(10,15,30,0.4));
+      transition: bottom 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .cert-card:hover .cert-overlay { bottom: 0; }
+
+    /* ── Skill badge stagger ── */
+    .skill-badge {
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s, box-shadow 0.2s;
+    }
+    .skill-badge.sb-visible { opacity: 1; transform: translateY(0); }
+    .skill-badge:hover { background: rgba(34,211,238,0.15); box-shadow: 0 0 12px rgba(34,211,238,0.25); }
+
+    /* ── Skill progress bars ── */
+    .skill-bar-wrap { margin-bottom: 0.75rem; }
+    .skill-bar-label { display: flex; justify-content: space-between; margin-bottom: 0.3rem; font-size: 0.8rem; }
+    .skill-bar-bg {
+      background: rgba(34,211,238,0.08); border-radius: 999px; height: 6px;
+      overflow: hidden; border: 1px solid rgba(34,211,238,0.1);
+    }
+    .skill-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #22d3ee, #3b82f6);
+      border-radius: 999px;
+      transition: width 1.3s cubic-bezier(0.16,1,0.3,1);
+      position: relative; overflow: hidden;
+    }
+    .skill-bar-fill::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+      animation: barShimmer 2s linear infinite;
+    }
+    @keyframes barShimmer { 0%{transform:translateX(-100%)} 100%{transform:translateX(200%)} }
+
+    /* ── Profile card float ── */
+    @keyframes floatY { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    .profile-float { animation: floatY 4.5s ease-in-out infinite; }
+
+    /* ── Social card slide-in ── */
+    .social-card {
+      opacity: 0; transform: translateX(40px);
+      transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1), border-color 0.25s, box-shadow 0.25s;
+    }
+    .social-card.sc-visible { opacity: 1; transform: translateX(0); }
+    .social-card:hover { border-color: #22d3ee; transform: translateX(6px) !important; box-shadow: 0 4px 20px rgba(34,211,238,0.12); }
+
+    /* ── Footer grid lines ── */
+    footer { position: relative; overflow: hidden; }
+    footer::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: gridPulse 4s ease-in-out infinite;
+    }
+    @keyframes gridPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+    /* ── Toast notification ── */
+    #toast {
+      position: fixed; bottom: 1.5rem; right: 1.5rem;
+      background: linear-gradient(135deg, #22d3ee, #3b82f6);
+      color: #0a0f1e;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.6rem;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform 0.35s, opacity 0.35s;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    #toast.show { transform: translateY(0); opacity: 1; }
+  </style>
+</head>
+<body>
+
+<div id="scroll-progress"></div>
+<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+<!-- ================================================================
+     NAVBAR
+     ================================================================ -->
+<nav id="navbar">
+  <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="#home" class="text-lg font-black tracking-tight gradient-text select-none">
+      harun<span class="text-slate-400 font-light">.</span>dev
+    </a>
+
+    <!-- Desktop nav links -->
+    <ul class="hidden md:flex items-center gap-8 list-none">
+      <li><a href="#home"         class="nav-link">Home</a></li>
+      <li><a href="#about"        class="nav-link">About</a></li>
+      <li><a href="#projects"     class="nav-link">Projects</a></li>
+      <li><a href="#certificates" class="nav-link">Certificates</a></li>
+      <li><a href="https://drive.google.com/drive/folders/1z5vohAlIdqNReoID-nyyYzPA_SG4aP78?usp=sharing" target="_blank" rel="noopener noreferrer" class="nav-link flex items-center gap-1"><i class="fa-brands fa-google-drive text-xs"></i> Drive</a></li>
+      <li><a href="#contact"      class="nav-link">Contact</a></li>
+    </ul>
+
+    <!-- CTA button -->
+    <a href="#contact" class="hidden md:inline-flex btn-gradient text-sm">
+      <i class="fa-solid fa-paper-plane"></i> Hubungi Saya
+    </a>
+
+    <!-- Hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5 p-2 focus:outline-none" aria-label="Toggle menu">
+      <span class="hamburger-line block w-6 h-0.5 bg-slate-300 transition-all duration-300"></span>
+      <span class="hamburger-line block w-6 h-0.5 bg-slate-300 transition-all duration-300"></span>
+      <span class="hamburger-line block w-6 h-0.5 bg-slate-300 transition-all duration-300"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu">
+    <a href="#home"         class="mobile-nav-link" onclick="closeMobileMenu()">Home</a>
+    <a href="#about"        class="mobile-nav-link" onclick="closeMobileMenu()">About</a>
+    <a href="#projects"     class="mobile-nav-link" onclick="closeMobileMenu()">Projects</a>
+    <a href="#certificates" class="mobile-nav-link" onclick="closeMobileMenu()">Certificates</a>
+    <a href="https://drive.google.com/drive/folders/1z5vohAlIdqNReoID-nyyYzPA_SG4aP78?usp=sharing" target="_blank" rel="noopener noreferrer" class="mobile-nav-link"><i class="fa-brands fa-google-drive mr-1"></i> Drive</a>
+    <a href="#contact"      class="mobile-nav-link" onclick="closeMobileMenu()">Contact</a>
+  </div>
+</nav>
+
+<!-- ================================================================
+     HERO SECTION
+     ================================================================ -->
+<section id="home" class="hero-bg min-h-screen flex items-center pt-20">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-content max-w-6xl mx-auto px-5 py-20 w-full">
+    <div class="flex flex-col lg:flex-row items-center gap-14">
+
+      <!-- Text side -->
+      <div class="flex-1 text-center lg:text-left">
+        <div class="hero-anim">
+        <p class="text-accent-cyan font-semibold text-sm uppercase tracking-widest mb-3">
+          <i class="fa-solid fa-terminal mr-1"></i> Welcome to my portfolio
+        </p>
+        </div>
+        <div class="hero-anim">
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-4">
+          Hi, Saya<br />
+          <span class="gradient-text">Muhamad Harun</span><br />
+          <span class="text-slate-300">Nizan</span>
+        </h1>
+        </div>
+        <div class="hero-anim">
+        <p class="text-slate-400 text-base sm:text-lg mb-3 font-medium">
+          Siswa <span class="text-accent-cyan font-semibold">Teknik Jaringan Komputer &amp; Telekomunikasi</span>
+        </p>
+        </div>
+        <div class="hero-anim">
+        <p id="typing-text" class="text-slate-500 text-sm sm:text-base mb-8 typing-cursor min-h-[1.5rem]"></p>
+        </div>
+        <div class="hero-anim">
+        <div class="flex flex-wrap gap-3 justify-center lg:justify-start">
+          <a href="#projects" class="btn-gradient text-sm">
+            <i class="fa-solid fa-briefcase"></i> Lihat Project
+          </a>
+          <a href="#contact" class="btn-outline text-sm">
+            <i class="fa-solid fa-envelope"></i> Kontak Saya
+          </a>
+          <a href="MUHAMAD HARUN NIZAN - CV.pdf.pdf" download="CV_Muhamad_Harun_Nizan.pdf"
+             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-105"
+             style="border:1.5px solid rgba(148,163,184,0.3);color:#94a3b8;background:rgba(148,163,184,0.05);">
+            <i class="fa-solid fa-file-arrow-down"></i> Download CV
+          </a>
+        </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     ABOUT SECTION
+     ================================================================ -->
+<section id="about" class="py-24" style="background: linear-gradient(180deg, #0a0f1e 0%, #0d1530 50%, #0a0f1e 100%);">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section title -->
+    <div class="text-center mb-16 reveal">
+      <p class="text-accent-cyan text-sm font-semibold uppercase tracking-widest mb-2">Get to know me</p>
+      <h2 class="text-3xl sm:text-4xl font-black section-title">Tentang Saya</h2>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-12 items-center">
+
+      <!-- Left: decorative card -->
+      <div class="flex-shrink-0 reveal" style="transition-delay:0.1s;">
+        <div class="card card-glow p-7 w-64 mx-auto text-center profile-float">
+          <div class="w-20 h-20 rounded-full mx-auto mb-4 overflow-hidden" style="border: 2px solid #1e2a45;">
+            <img src="https://drive.google.com/thumbnail?id=1uAeZSnVqxvExBp4MdryKmkqlLFXV2iH1&sz=w160"
+                 alt="Muhamad Harun Nizan"
+                 class="w-full h-full object-cover"
+                 onerror="this.parentElement.innerHTML='<i class=\'fa-solid fa-user-tie gradient-text\' style=\'font-size:2rem;\'></i>'" />
+          </div>
+          <p class="font-bold text-white text-lg">Muhamad Harun Nizan</p>
+          <p class="text-slate-500 text-xs mt-1">TJKT Student</p>
+          <hr class="border-dark-border my-4" />
+          <div class="flex flex-col gap-2 text-sm text-slate-400 text-left">
+            <div class="flex items-center gap-2"><i class="fa-solid fa-map-pin text-accent-cyan w-4"></i> Bogor, Indonesia</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-school text-accent-cyan w-4"></i> SMK WIKRAMA BOGOR</div>
+            <div class="flex items-center gap-2"><i class="fa-solid fa-network-wired text-accent-cyan w-4"></i> MikroTik &amp; Linux Specialist</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: bio + skills -->
+      <div class="flex-1 reveal" style="transition-delay:0.2s;">
+        <p class="text-slate-400 leading-relaxed mb-4">
+          Halo! Saya <strong class="text-white">Muhamad Harun Nizan</strong>, siswa
+          <strong class="text-accent-cyan">TJKT</strong> yang berdedikasi tinggi dalam mendalami infrastruktur IT.
+          Spesialisasi dan fokus saya terletak pada konfigurasi jaringan <span class="text-accent-cyan font-semibold">MikroTik</span>
+          serta pengelolaan sistem server <span class="text-accent-cyan font-semibold">Linux</span>.
+        </p>
+        <p class="text-slate-400 leading-relaxed mb-8">
+          Berbekal pengalaman praktis dari ekskul dan laboratorium sekolah, saya menguasai dasar-dasar routing,
+          manajemen bandwidth, keamanan jaringan, serta administrasi server via CLI. Saya siap menyongsong dunia
+          industri dan berkontribusi secara produktif sebagai
+          <span class="text-accent-cyan font-semibold">Junior Network/Server Engineer</span>.
+        </p>
+
+        <!-- Skills -->
+        <h4 class="text-white font-semibold mb-3">Tech &amp; Skills</h4>
+        <div class="flex flex-wrap gap-2" id="skill-badges">
+          <span class="skill-badge"><i class="fa-solid fa-route"></i> MikroTik</span>
+          <span class="skill-badge"><i class="fa-brands fa-linux"></i> Linux CLI</span>
+          <span class="skill-badge"><i class="fa-solid fa-server"></i> Server &amp; VM</span>
+          <span class="skill-badge"><i class="fa-solid fa-wifi"></i> Wireless</span>
+        </div>
+        <!-- Skill progress bars -->
+        <div class="mt-6" id="skill-bars">
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span class="text-slate-300">MikroTik</span><span class="text-cyan-400 font-bold">85%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span class="text-slate-300">Linux CLI</span><span class="text-cyan-400 font-bold">80%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span class="text-slate-300">Server &amp; VM</span><span class="text-cyan-400 font-bold">75%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-bar-label"><span class="text-slate-300">Wireless</span><span class="text-cyan-400 font-bold">70%</span></div>
+            <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ================================================================
+     PROJECTS SECTION
+     ================================================================ -->
+<section id="projects" class="py-24 bg-dark-base">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section title -->
+    <div class="text-center mb-10 reveal-up">
+      <p class="text-accent-cyan text-sm font-semibold uppercase tracking-widest mb-2">What I've built</p>
+      <h2 class="text-3xl sm:text-4xl font-black section-title">Projects</h2>
+    </div>
+
+    <!-- Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Project 1 -->
+      <div class="card card-glow project-card tilt-el p-6 reveal-left">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="project-icon-wrap"><i class="fa-solid fa-wifi text-accent-cyan"></i></div>
+          <div>
+            <span class="tag">MikroTik</span>
+            <h3 class="text-white font-bold mt-1.5 text-base leading-tight">Implementasi Hotspot Login Menggunakan MikroTik</h3>
+          </div>
+        </div>
+        <p class="text-xs text-cyan-400 font-semibold mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-user-gear text-xs"></i> Administrator Jaringan · Proyek Pembelajaran
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+          Konfigurasi Hotspot MikroTik untuk autentikasi pengguna, pengaturan DHCP, NAT, dan manajemen akses internet sebagai simulasi jaringan pada lingkungan pembelajaran.
+        </p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="tag">MikroTik</span><span class="tag">Hotspot</span>
+          <span class="tag">DHCP</span><span class="tag">NAT</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="card card-glow project-card tilt-el p-6 reveal-up" style="transition-delay:.08s;">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="project-icon-wrap"><i class="fa-brands fa-linux text-accent-cyan"></i></div>
+          <div>
+            <span class="tag">Linux Server</span>
+            <h3 class="text-white font-bold mt-1.5 text-base leading-tight">Implementasi Layanan Jaringan pada Linux Server</h3>
+          </div>
+        </div>
+        <p class="text-xs text-cyan-400 font-semibold mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-user-gear text-xs"></i> Administrator Server Linux · Proyek Pembelajaran
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+          Instalasi dan konfigurasi layanan jaringan: DHCP Server, DNS Server, FTP Server, Samba Server, dan SSH untuk mendukung kebutuhan jaringan client-server.
+        </p>
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          <span class="tag">DHCP</span><span class="tag">DNS</span>
+          <span class="tag">FTP</span><span class="tag">SSH</span><span class="tag">Samba</span>
+        </div>
+        <a href="https://docs.google.com/document/d/1hbUaD5-y3HnSzoE3br17i4WVbiheVy9t/edit?usp=sharing"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105"
+           style="background:linear-gradient(135deg,#22d3ee,#3b82f6);color:#0a0f1e;">
+          <i class="fa-solid fa-book-open"></i> Lihat Dokumentasi
+        </a>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="card card-glow project-card tilt-el p-6 reveal-right" style="transition-delay:.16s;">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="project-icon-wrap"><i class="fa-solid fa-globe text-accent-cyan"></i></div>
+          <div>
+            <span class="tag">Web Server</span>
+            <h3 class="text-white font-bold mt-1.5 text-base leading-tight">Hosting Website Statis dan Dinamis</h3>
+          </div>
+        </div>
+        <p class="text-xs text-cyan-400 font-semibold mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-user-gear text-xs"></i> Administrator Web Server · Proyek Pembelajaran
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+          Deployment website statis dan dinamis pada Linux Server, termasuk konfigurasi web server, pengelolaan file website, dan pengujian akses layanan.
+        </p>
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          <span class="tag">Apache</span><span class="tag">Linux</span>
+          <span class="tag">HTML</span><span class="tag">PHP</span>
+        </div>
+        <a href="https://docs.google.com/document/d/14YB20aUfnZLv5_jV-JEexdAB281rb9H9/edit?usp=drive_link"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105"
+           style="background:linear-gradient(135deg,#22d3ee,#3b82f6);color:#0a0f1e;">
+          <i class="fa-solid fa-book-open"></i> Lihat Dokumentasi
+        </a>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="card card-glow project-card tilt-el p-6 reveal-left" style="transition-delay:.08s;">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="project-icon-wrap"><i class="fa-brands fa-wordpress text-accent-cyan"></i></div>
+          <div>
+            <span class="tag">CMS</span>
+            <h3 class="text-white font-bold mt-1.5 text-base leading-tight">Implementasi WordPress pada Linux Server</h3>
+          </div>
+        </div>
+        <p class="text-xs text-cyan-400 font-semibold mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-user-gear text-xs"></i> Administrator Sistem · Proyek Pembelajaran
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+          Instalasi dan konfigurasi WordPress beserta database pendukung, pengaturan web server, dan pengelolaan website berbasis Content Management System (CMS).
+        </p>
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          <span class="tag">WordPress</span><span class="tag">MySQL</span>
+          <span class="tag">Apache</span><span class="tag">PHP</span>
+        </div>
+        <a href="https://docs.google.com/document/d/1rpeYVjMHdi2alaxXCeomUJhqaNbIJleK/edit?usp=sharing"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105"
+           style="background:linear-gradient(135deg,#22d3ee,#3b82f6);color:#0a0f1e;">
+          <i class="fa-solid fa-book-open"></i> Lihat Dokumentasi
+        </a>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="card card-glow project-card tilt-el p-6 reveal-up" style="transition-delay:.16s;">
+        <div class="flex items-start gap-4 mb-3">
+          <div class="project-icon-wrap"><i class="fa-solid fa-chart-line text-accent-cyan"></i></div>
+          <div>
+            <span class="tag">Monitoring</span>
+            <h3 class="text-white font-bold mt-1.5 text-base leading-tight">Implementasi Monitoring Server Menggunakan Zabbix</h3>
+          </div>
+        </div>
+        <p class="text-xs text-cyan-400 font-semibold mb-2 flex items-center gap-1">
+          <i class="fa-solid fa-user-gear text-xs"></i> Administrator Monitoring Server · Proyek Pembelajaran
+        </p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+          Implementasi sistem monitoring menggunakan Zabbix untuk memantau ketersediaan layanan, penggunaan sumber daya server, dan performa jaringan secara terpusat.
+        </p>
+        <div class="flex flex-wrap gap-1.5 mb-4">
+          <span class="tag">Zabbix</span><span class="tag">Linux</span>
+          <span class="tag">Monitoring</span><span class="tag">Networking</span>
+        </div>
+        <a href="https://docs.google.com/document/d/1sESsVbCKOuLRcEr3wHTeVH4LQKmgCkJG/edit?usp=sharing"
+           target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all hover:scale-105"
+           style="background:linear-gradient(135deg,#22d3ee,#3b82f6);color:#0a0f1e;">
+          <i class="fa-solid fa-book-open"></i> Lihat Dokumentasi
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================================
+     CERTIFICATES SECTION
+     ================================================================ -->
+<section id="certificates" class="py-24" style="background: linear-gradient(180deg, #0a0f1e 0%, #0d1530 50%, #0a0f1e 100%);">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section title -->
+    <div class="text-center mb-16 reveal">
+      <p class="text-accent-cyan text-sm font-semibold uppercase tracking-widest mb-2">My credentials</p>
+      <h2 class="text-3xl sm:text-4xl font-black section-title">Sertifikat</h2>
+    </div>
+
+    <!-- Grid: 1 col mobile | 2 col sm | 3 col lg -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- ───────────────────────────────────────────────
+           CERT 1 — Virtual Machine Fundamental (Aguna Course)
+           ─────────────────────────────────────────────── -->
+      <a
+        href="https://drive.google.com/file/d/1EJFb4bAKWu7GXfCaKp5kzT_TheGk8Wkd/view?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card card-glow cert-card reveal"
+      >
+        <!-- Image wrapper -->
+        <div class="cert-img-wrap">
+          <img
+            src="https://drive.google.com/thumbnail?id=1EJFb4bAKWu7GXfCaKp5kzT_TheGk8Wkd&sz=w400"
+            alt="Sertifikat Virtual Machine Fundamental"
+            loading="lazy"
+            onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'fa-solid fa-certificate\' style=\'font-size:2.5rem;\'></i><span style=\'font-size:0.8rem;font-weight:600;\'>Virtual Machine Fundamental</span></div>';"
+          />
+          <div class="cert-overlay">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Sertifikat
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="p-5 flex flex-col gap-1.5">
+          <h3 class="text-white font-bold text-base leading-tight">Virtual Machine Fundamental</h3>
+          <p class="text-slate-400 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-building text-accent-cyan text-xs"></i> Aguna Course
+          </p>
+          <div class="flex items-center justify-between mt-1">
+            <p class="text-slate-500 text-xs flex items-center gap-1">
+              <i class="fa-regular fa-calendar text-xs"></i> 25 Sep 2024
+            </p>
+            <p class="text-slate-600 text-xs font-mono">No: AC-899-25452397-98</p>
+          </div>
+        </div>
+      </a>
+
+      <!-- ───────────────────────────────────────────────
+           CERT 2 — (GANTI nama & penerbit setelah cek isi file)
+           ─────────────────────────────────────────────── -->
+      <!-- GANTI nama & penerbit setelah cek isi file -->
+      <a
+        href="https://drive.google.com/file/d/1IeVfsyFFVc4LyZPg_aZ4bwX8LsTL3SUS/view?usp=drive_link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card card-glow cert-card reveal"
+        style="transition-delay:0.08s;"
+      >
+        <!-- Image wrapper -->
+        <div class="cert-img-wrap">
+          <img
+            src="https://drive.google.com/thumbnail?id=1IeVfsyFFVc4LyZPg_aZ4bwX8LsTL3SUS&sz=w400"
+            alt="Sertifikat Nama Sertifikat 2"
+            loading="lazy"
+            onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'fa-solid fa-certificate\' style=\'font-size:2.5rem;\'></i><span style=\'font-size:0.8rem;font-weight:600;\'>Nama Sertifikat 2</span></div>';"
+          />
+          <div class="cert-overlay">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Sertifikat
+          </div>
+        </div>
+        <!-- Info -->
+        <div class="p-5 flex flex-col gap-1.5">
+          <h3 class="text-white font-bold text-base leading-tight">Virtual Machine Fundamental</h3>
+          <p class="text-slate-400 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-building text-accent-cyan text-xs"></i> Aguna Course
+          </p>
+          <div class="flex items-center justify-between mt-1">
+            <p class="text-slate-500 text-xs flex items-center gap-1">
+              <i class="fa-regular fa-calendar text-xs"></i> 25 Sep 2024
+            </p>
+          </div>
+        </div>
+      </a>
+
+      <!-- ───────────────────────────────────────────────
+      <!-- CERT 3 — Cybersecurity Essentials | Digitalent Kominfo x Cisco -->
+      <a
+        href="https://drive.google.com/file/d/1xBluse6K2cOIgdjTBGT-gcT__rIfTyn4/view?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card card-glow cert-card reveal"
+        style="transition-delay:0.16s;"
+      >        <div class="cert-img-wrap">
+          <img
+            src="https://drive.google.com/thumbnail?id=1xBluse6K2cOIgdjTBGT-gcT__rIfTyn4&sz=w400"
+            alt="Sertifikat Cybersecurity Essentials"
+            loading="lazy"
+            onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'fa-solid fa-shield-halved\' style=\'font-size:2.5rem;\'></i><span style=\'font-size:0.8rem;font-weight:600;\'>Cybersecurity Essentials</span></div>';"
+          />
+          <div class="cert-overlay">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Sertifikat
+          </div>
+        </div>
+        <div class="p-5 flex flex-col gap-1.5">
+          <h3 class="text-white font-bold text-base leading-tight">Cybersecurity Essentials</h3>
+          <p class="text-slate-400 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-building text-accent-cyan text-xs"></i> Digitalent Kominfo &times; Cisco Networking Academy
+          </p>
+          <div class="flex items-center justify-between mt-1">
+            <p class="text-slate-500 text-xs flex items-center gap-1">
+              <i class="fa-regular fa-calendar text-xs"></i> 26 Jan 2026
+            </p>
+          </div>
+        </div>
+      </a>
+
+      <!-- ───────────────────────────────────────────────
+      <!-- CERT 4 — Introduction to Cybersecurity | Digitalent Kominfo x Cisco -->
+      <a
+        href="https://drive.google.com/file/d/1tLZ_AM1D7Gmnvhurx4WwmWQZ56ztGKP3/view?usp=sharing"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="card card-glow cert-card reveal"
+        style="transition-delay:0.08s;"
+      >
+        <div class="cert-img-wrap">
+          <img
+            src="https://drive.google.com/thumbnail?id=1tLZ_AM1D7Gmnvhurx4WwmWQZ56ztGKP3&sz=w400"
+            alt="Sertifikat Introduction to Cybersecurity"
+            loading="lazy"
+            onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\'cert-placeholder\'><i class=\'fa-solid fa-shield-halved\' style=\'font-size:2.5rem;\'></i><span style=\'font-size:0.8rem;font-weight:600;\'>Introduction to Cybersecurity</span></div>';"
+          />
+          <div class="cert-overlay">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Lihat Sertifikat
+          </div>
+        </div>
+        <div class="p-5 flex flex-col gap-1.5">
+          <h3 class="text-white font-bold text-base leading-tight">Introduction to Cybersecurity</h3>
+          <p class="text-slate-400 text-sm flex items-center gap-1.5">
+            <i class="fa-solid fa-building text-accent-cyan text-xs"></i> Digitalent Kominfo &times; Cisco Networking Academy
+          </p>
+          <div class="flex items-center justify-between mt-1">
+            <p class="text-slate-500 text-xs flex items-center gap-1">
+              <i class="fa-regular fa-calendar text-xs"></i> 16 Jan 2026
+            </p>
+          </div>
+        </div>
+      </a>
+      </a>
+
+
+    </div><!-- /grid -->
+  </div>
+</section>
+
+<!-- ================================================================
+     CONTACT SECTION
+     ================================================================ -->
+<section id="contact" class="py-24 bg-dark-base">
+  <div class="max-w-6xl mx-auto px-5">
+
+    <!-- Section title -->
+    <div class="text-center mb-16 reveal">
+      <p class="text-accent-cyan text-sm font-semibold uppercase tracking-widest mb-2">Let's connect</p>
+      <h2 class="text-3xl sm:text-4xl font-black section-title">Hubungi Saya</h2>
+      <p class="text-slate-400 mt-4 max-w-lg mx-auto text-sm">
+        Punya pertanyaan, tawaran kolaborasi, atau sekadar ingin ngobrol soal teknologi? Jangan ragu untuk menghubungi saya!
+      </p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-10">
+
+      <!-- Contact Form -->
+      <div class="flex-1 reveal">
+        <div class="card p-7">
+          <h3 class="text-white font-bold text-lg mb-6 flex items-center gap-2">
+            <i class="fa-solid fa-paper-plane text-accent-cyan"></i> Kirim Pesan
+          </h3>
+          <form id="contact-form" novalidate>
+            <div class="flex flex-col sm:flex-row gap-4 mb-4">
+              <div class="flex-1">
+                <label class="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Nama</label>
+                <input type="text" id="f-name" class="form-input" placeholder="Nama lengkap kamu" required />
+              </div>
+              <div class="flex-1">
+                <label class="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Email</label>
+                <input type="email" id="f-email" class="form-input" placeholder="email@kamu.com" required />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Subjek</label>
+              <input type="text" id="f-subject" class="form-input" placeholder="Subjek pesan" />
+            </div>
+            <div class="mb-6">
+              <label class="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Pesan</label>
+              <textarea id="f-message" class="form-input" placeholder="Tulis pesanmu di sini…" required></textarea>
+            </div>
+            <button type="submit" class="btn-gradient w-full justify-center text-sm">
+              <i class="fa-solid fa-paper-plane"></i> Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Info cards -->
+      <div class="lg:w-80 flex flex-col gap-4 reveal" style="transition-delay:0.12s;">
+
+        <h3 class="text-white font-bold text-lg flex items-center gap-2">
+          <i class="fa-solid fa-address-card text-accent-cyan"></i> Info Kontak
+        </h3>
+
+        <a href="mailto:muhamadharun4810@gmail.com" class="social-card">
+          <div class="social-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Email</p>
+            <p class="text-sm text-slate-300 font-medium">muhamadharun4810@gmail.com</p>
+          </div>
+        </a>
+
+        <a href="https://wa.me/6289536543778" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fa-brands fa-whatsapp"></i></div>
+          <div>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">WhatsApp</p>
+            <p class="text-sm text-slate-300 font-medium">+62 895-3654-3778</p>
+          </div>
+        </a>
+
+
+        <a href="https://github.com/muhamadharun4810-commits" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fa-brands fa-github"></i></div>
+          <div>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">GitHub</p>
+            <p class="text-sm text-slate-300 font-medium">muhamadharun4810-commits</p>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/muhamad-harun-nizan-039811413" target="_blank" rel="noopener" class="social-card">
+          <div class="social-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+          <div>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">LinkedIn</p>
+            <p class="text-sm text-slate-300 font-medium">Muhamad Harun Nizan</p>
+          </div>
+        </a>
+
+        <!-- Location card -->
+        <div class="card p-4 flex items-center gap-3 mt-2">
+          <div class="social-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div>
+            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Lokasi</p>
+            <p class="text-sm text-slate-300 font-medium">Bogor, Indonesia 🇮🇩</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+<footer class="py-10 bg-dark-base">
+  <div class="max-w-6xl mx-auto px-5">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+
+      <!-- Brand -->
+      <div class="text-center sm:text-left">
+        <p class="text-lg font-black gradient-text">harun<span class="text-slate-500 font-light">.dev</span></p>
+        <p class="text-slate-500 text-xs mt-1">Muhamad Harun Nizan &bull; TJKT Student</p>
+      </div>
+
+      <!-- Nav links -->
+      <div class="flex flex-wrap gap-5 justify-center">
+        <a href="#home"         class="text-slate-500 hover:text-accent-cyan text-sm transition-colors">Home</a>
+        <a href="#about"        class="text-slate-500 hover:text-accent-cyan text-sm transition-colors">About</a>
+        <a href="#projects"     class="text-slate-500 hover:text-accent-cyan text-sm transition-colors">Projects</a>
+        <a href="#certificates" class="text-slate-500 hover:text-accent-cyan text-sm transition-colors">Certificates</a>
+        <a href="#contact"      class="text-slate-500 hover:text-accent-cyan text-sm transition-colors">Contact</a>
+      </div>
+
+      <!-- Social icons -->
+      <div class="flex gap-3">
+        <a href="https://github.com/" target="_blank" rel="noopener"
+           class="w-9 h-9 rounded-lg border border-dark-border flex items-center justify-center text-slate-400 hover:text-accent-cyan hover:border-accent-cyan transition-colors">
+          <i class="fa-brands fa-github text-sm"></i>
+        </a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener"
+           class="w-9 h-9 rounded-lg border border-dark-border flex items-center justify-center text-slate-400 hover:text-accent-cyan hover:border-accent-cyan transition-colors">
+          <i class="fa-brands fa-linkedin-in text-sm"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="mt-8 pt-6 border-t border-dark-border text-center text-slate-600 text-xs">
+      &copy; <span id="year"></span> Muhamad Harun Nizan. Made with <i class="fa-solid fa-heart text-red-500 mx-0.5"></i> &amp; Tailwind CSS.
+    </div>
+  </div>
+</footer>
+
+<!-- Toast notification -->
+<div id="toast"><i class="fa-solid fa-check-circle mr-2"></i> Pesan berhasil dikirim!</div>
+
+<!-- ================================================================
+     JAVASCRIPT
+     ================================================================ -->
+<script>
+  /* ── Year ── */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ── Navbar scroll effect ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  /* ── Hamburger / Mobile menu ── */
+  const hamburger   = document.getElementById('hamburger');
+  const mobileMenu  = document.getElementById('mobile-menu');
+  const hamLines    = hamburger.querySelectorAll('.hamburger-line');
+  let menuOpen = false;
+
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    // Animate to X
+    if (menuOpen) {
+      hamLines[0].style.transform = 'translateY(8px) rotate(45deg)';
+      hamLines[1].style.opacity   = '0';
+      hamLines[2].style.transform = 'translateY(-8px) rotate(-45deg)';
+    } else {
+      hamLines.forEach(l => { l.style.transform = ''; l.style.opacity = ''; });
+    }
+  });
+
+  function closeMobileMenu() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    hamLines.forEach(l => { l.style.transform = ''; l.style.opacity = ''; });
+  }
+
+  /* ── Scroll Spy — highlight active nav link ── */
+  const sections  = document.querySelectorAll('section[id]');
+  const navLinks  = document.querySelectorAll('.nav-link');
+
+  function updateSpy() {
+    const scrollY = window.scrollY + 100;
+    sections.forEach(sec => {
+      const top    = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id     = sec.getAttribute('id');
+      if (scrollY >= top && scrollY < top + height) {
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }
+  window.addEventListener('scroll', updateSpy, { passive: true });
+  updateSpy();
+
+  /* ── Intersection Observer — reveal on scroll ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer  = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── Typing animation ── */
+  const typingEl   = document.getElementById('typing-text');
+  const phrases    = [
+    'Network Engineer in the making...',
+    'Exploring Linux & Virtualization...',
+    'Building skills in cybersecurity...',
+    'Passionate about IT infrastructure...',
+    'Always learning, always growing...',
+  ];
+  let phraseIdx  = 0;
+  let charIdx    = 0;
+  let deleting   = false;
+  let typingTimeout;
+
+  function typeEffect() {
+    const current = phrases[phraseIdx];
+    if (!deleting) {
+      typingEl.textContent = current.slice(0, charIdx + 1);
+      charIdx++;
+      if (charIdx === current.length) {
+        deleting = true;
+        typingTimeout = setTimeout(typeEffect, 1800);
+        return;
+      }
+    } else {
+      typingEl.textContent = current.slice(0, charIdx - 1);
+      charIdx--;
+      if (charIdx === 0) {
+        deleting  = false;
+        phraseIdx = (phraseIdx + 1) % phrases.length;
+        typingTimeout = setTimeout(typeEffect, 400);
+        return;
+      }
+    }
+    typingTimeout = setTimeout(typeEffect, deleting ? 45 : 65);
+  }
+  typeEffect();
+
+  /* ── Contact form submit ── */
+  const form  = document.getElementById('contact-form');
+  const toast = document.getElementById('toast');
+
+  function showToast(msg, isError) {
+    toast.innerHTML = isError
+      ? '<i class="fa-solid fa-circle-exclamation mr-2"></i>' + msg
+      : '<i class="fa-solid fa-check-circle mr-2"></i>' + msg;
+    if (isError) {
+      toast.style.background = 'linear-gradient(135deg, #ef4444, #b91c1c)';
+      toast.style.color = '#fff';
+    } else {
+      toast.style.background = 'linear-gradient(135deg, #22d3ee, #3b82f6)';
+      toast.style.color = '#0a0f1e';
+    }
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 3500);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name    = document.getElementById('f-name').value.trim();
+    const email   = document.getElementById('f-email').value.trim();
+    const subject = document.getElementById('f-subject').value.trim();
+    const message = document.getElementById('f-message').value.trim();
+
+    if (!name || !email || !message) {
+      showToast('Mohon isi semua field yang wajib diisi!', true);
+      return;
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showToast('Format email tidak valid!', true);
+      return;
+    }
+
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim…';
+
+    try {
+      const res = await fetch('https://formspree.io/f/xpqeagjn', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, subject, message })
+      });
+      if (res.ok) {
+        form.reset();
+        showToast('Pesan berhasil dikirim! Saya akan segera membalas.', false);
+      } else {
+        showToast('Gagal mengirim. Coba lagi ya!', true);
+      }
+    } catch(err) {
+      showToast('Koneksi bermasalah. Periksa internet kamu.', true);
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pesan';
+    }
+  });
+
+  /* ── Smooth scroll for anchor links on same page ── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  /* ── Page load ── */
+  window.addEventListener('load', () => setTimeout(() => document.body.classList.add('loaded'), 200));
+
+  /* ── Scroll progress bar ── */
+  const prog = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.width = (total > 0 ? (document.documentElement.scrollTop / total) * 100 : 0) + '%';
+  }, {passive:true});
+
+  /* ── Back to top ── */
+  const backBtn = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => backBtn.classList.toggle('visible', window.scrollY > 300), {passive:true});
+
+  /* ── reveal-up / left / right ── */
+  const rvObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); rvObs.unobserve(e.target); }});
+  }, {threshold:0.1});
+  document.querySelectorAll('.reveal-up,.reveal-left,.reveal-right').forEach(el => rvObs.observe(el));
+
+  /* ── Skill badges stagger ── */
+  const badgesEl = document.getElementById('skill-badges');
+  if(badgesEl){
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.querySelectorAll('.skill-badge').forEach((b,i)=>setTimeout(()=>b.classList.add('sb-visible'),i*90)); obs.unobserve(e.target); }});
+    }, {threshold:0.3}).observe(badgesEl);
+  }
+
+  /* ── Skill progress bars ── */
+  const barsEl = document.getElementById('skill-bars');
+  if(barsEl){
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.querySelectorAll('.skill-bar-fill').forEach(b=>setTimeout(()=>b.style.width=b.getAttribute('data-width')+'%',200)); obs.unobserve(e.target); }});
+    }, {threshold:0.3}).observe(barsEl);
+  }
+
+  /* ── Social cards stagger slide-in ── */
+  document.querySelectorAll('.social-card').forEach((c, i) => {
+    new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('sc-visible'), i*90); obs.unobserve(e.target); }});
+    }, {threshold:0.15}).observe(c);
+  });
+
+  /* ── 3D tilt on project cards ── */
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const rx = ((e.clientY - r.top  - r.height/2) / (r.height/2)) * -5;
+      const ry = ((e.clientX - r.left - r.width/2)  / (r.width/2))  *  5;
+      card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-8px)`;
+      card.style.transition = 'transform 0.1s ease';
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+    });
+  });
+</script>
+<script>
+/* ── Image skeleton + fade-in on load ── */
+document.querySelectorAll('.cert-img-wrap img').forEach(img => {
+  // Tambah skeleton background saat belum load
+  img.parentElement.classList.add('img-skeleton');
+  img.classList.add('loading-img');
+
+  function onLoad() {
+    img.parentElement.classList.remove('img-skeleton');
+    img.classList.remove('loading-img');
+    img.classList.add('loaded-img');
+  }
+
+  if (img.complete && img.naturalWidth > 0) {
+    onLoad();
+  } else {
+    img.addEventListener('load', onLoad);
+    img.addEventListener('error', () => {
+      img.parentElement.classList.remove('img-skeleton');
+      img.classList.add('loaded-img');
+    });
+  }
+});
+</script>
+<script>
+/* ── Particles network effect ── */
+(function(){
+  const canvas = document.getElementById('particles-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const COUNT = 70, DIST = 120, particles = [];
+
+  function resize(){
+    const s = document.getElementById('home');
+    W = canvas.width  = s.offsetWidth;
+    H = canvas.height = s.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class P {
+    constructor(){ this.reset(true); }
+    reset(r){
+      this.x  = r ? Math.random()*W : (Math.random()<0.5 ? -5 : W+5);
+      this.y  = Math.random()*H;
+      this.vx = (Math.random()-0.5)*0.5;
+      this.vy = (Math.random()-0.5)*0.5;
+      this.r  = 1 + Math.random()*1.5;
+      this.a  = 0.3 + Math.random()*0.45;
+    }
+    update(){ this.x+=this.vx; this.y+=this.vy; if(this.x<-10||this.x>W+10||this.y<-10||this.y>H+10) this.reset(false); }
+    draw(){ ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fillStyle=`rgba(34,211,238,${this.a})`; ctx.fill(); }
+  }
+
+  for(let i=0;i<COUNT;i++) particles.push(new P());
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<particles.length;i++){
+      particles[i].update();
+      particles[i].draw();
+      for(let j=i+1;j<particles.length;j++){
+        const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<DIST){
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y);
+          ctx.strokeStyle=`rgba(34,211,238,${(1-d/DIST)*0.18})`;
+          ctx.lineWidth=0.7;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>
